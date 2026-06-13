@@ -992,7 +992,7 @@ impl PromptState {
             EventMsg::TokenCount(TokenCountEvent { info, .. }) => {
                 if let Some(info) = info
                     && let Some(size) = info.model_context_window {
-                        let used = info.last_token_usage.tokens_in_context_window().max(0) as u64;
+                        let used = info.total_token_usage.tokens_in_context_window().max(0) as u64;
                         client.send_notification(SessionUpdate::UsageUpdate(UsageUpdate::new(
                             used,
                             size as u64,
